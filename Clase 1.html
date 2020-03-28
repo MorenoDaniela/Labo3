@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Clase 1</title>
+        <script type = "text/javascript">
+
+            window.onload=
+                function()
+                {
+                    
+                    var btnEnviar = document.getElementById("botonEnviar");
+                    btnEnviar.onclick= function algo()
+                    {
+                        var usuario = document.getElementById("user").value;
+                        var contra = document.getElementById("pass").value;
+                        
+                        if (usuario == "Daniela" && contra == "1234")
+                        {
+                            alert("El usuario y la contraseña son correctos.");
+                        }else
+                        {
+                            alert("Usuario o contraseña incorrectos.");
+                        }
+                    }
+                    
+
+                }
+
+        </script>
+    </head>
+
+    <body>
+        Usuario:
+        <br>
+        <input type="text" id = "user" name="nombre">
+        <br>
+        Contraseña:
+        <br>
+        <input type="password" id="pass" name="contrasenia">
+        <br>
+        <input type="checkbox">Recordar usuario y Contraseña
+        <br>
+        <input type="button" value="Enviar" id = "botonEnviar">
+        <input type="button" value="Limpiar" id = "botonLimpiar">
+    </body
+</html>
