@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta charset="UTF-8">
+        <title> Clase 5 o 4</title>
+        <script type = "text/javascript">
+
+        
+        var http = new XMLHttpRequest();
+        window.onload = function ()
+        {
+            var btnEnviar = document.getElementById("botonEnviar");
+            btnEnviar.onclick = function algo ()
+            {
+                var name = document.getElementById("user").value;
+                var contra = document.getElementById("pass").value;
+                
+                 http.onreadystatechange= function anonima()
+                {
+                    console.log("llego respuesta", http.readyState);
+                    if (http.readyState==4)
+                    {
+                        if (http.status=200)
+                        {
+                            console.log("tenemos el 200");
+                            if (http.responseText===true)
+                            {
+                                alert ("Se logueo correctamente.");
+                            }else
+                            {
+                                alert("No se logueo correctamente.");
+                            }
+                            
+                        }else
+                        {
+                            console.log("tenemos un error");
+                        }
+                    }
+                }
+
+                http.open("GET","http://localhost:3000/login?usr="+name+"&pass="+contra,true);
+                http.send(); 
+                console.log("termino la llamada");
+            }
+        }
+
+       
+
+        </script>
+    </head>
+
+    <body>
+        usuario <input id= "user"> <br>
+        password <input id = "pass"> <br>
+        <input type="button" value="Enviar" id = "botonEnviar">
+    </body>
+</html>

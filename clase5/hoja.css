@@ -1,0 +1,67 @@
+#tabla, th, td
+{ 
+    background-color: rgb(247, 152, 226);
+    border-collapse: collapse;  /*Los bordes de la tabla se pegarán (mejor aspecto) */
+    border: 1px solid rgb(88, 17, 56);
+    padding: 10px;
+    padding-left: 20px;
+    font-family: 'Courier New', Courier, monospace;/*fuente*/
+    text-align: center;/*alineacion del texto*/
+    width: 50%; /*cuanto quiero que ocupe de la pantalla 50%*/
+    margin: 25px 50px 75px 100px;/* ARRIBA, DERECHA, ABAJO, IZQUIERDA*/
+    border-radius:5px;
+    justify-content: center;
+    z-index: -1; 
+}
+#btnAgregar
+{
+    background-color: rgb(33, 202, 70);
+    border: 1px solid black;
+    color: rgb(221, 234, 240);
+    padding: 10px;
+    padding-left: 20px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 50%;
+    border-radius:5px;
+}
+
+#user, #apellido, #telefono, #fecha
+{
+    background-color:   rgb(221, 234, 240);
+    color: rosybrown;
+    border-radius:5px;
+}
+
+#contenedorAgregar
+{
+    background: linear-gradient(to right, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%);
+    border-radius:5px;
+    width: 50%;
+    font-size: 20px;
+    box-shadow: 12px 12px 5px 0px rgba(0,0,0,0.75);
+    flex-wrap: wrap; /* Lo uso para que en vez de achicar los div, ponga uno debajo de otro.*/
+    position: absolute; 
+    top:25%; /*25% este y*/ 
+    left:25%; /*25% este, estaria en el medio*/
+    right:25%;
+   
+}
+
+#loader
+{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('Desktop/Labo3') 50% 50% no-repeat rgb(249,249,249);
+    opacity: .8;
+}
+
+
+
+

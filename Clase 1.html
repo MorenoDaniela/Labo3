@@ -23,6 +23,12 @@
                             alert("Usuario o contraseña incorrectos.");
                         }
                     }
+                    var btnLimpiar = document.getElementById("botonLimpiar");
+                    btnLimpiar.onclick = function limpio()
+                    {
+                        document.getElementById("user").value = "";
+                        document.getElementById("pass").value = "";
+                    }
                     
 
                 }

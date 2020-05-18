@@ -1,0 +1,46 @@
+
+#tabla, th, td
+{ 
+    background-color: rgb(247, 152, 226);
+    border-collapse: collapse;  /*Los bordes de la tabla se pegarán (mejor aspecto) */
+    border: 1px solid rgb(88, 17, 56);
+    padding: 10px;
+    padding-left: 20px;
+    font-family: 'Courier New', Courier, monospace;/*fuente*/
+    text-align: center;/*alineacion del texto*/
+    width: 50%; /*cuanto quiero que ocupe de la pantalla 50%*/
+    margin: 25px 50px 75px 100px;/* ARRIBA, DERECHA, ABAJO, IZQUIERDA*/
+}
+button 
+{
+    background-color: rgb(175, 76, 145);
+    border: 1px solid black;
+    color: rgb(185, 38, 136);
+    padding: 15px 32px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius:5px;
+    
+}
+
+#user
+{
+    background-color: deeppink;
+    color: rosybrown;
+}
+#apellido
+{
+    background-color: deeppink;
+    color: rosybrown;
+}
+
+#container
+{
+    background-color: whitesmoke;
+    width: 50%;
+    margin: 25px 50px 75px 100px;/* ARRIBA, DERECHA, ABAJO, IZQUIERDA*/
+    
+}

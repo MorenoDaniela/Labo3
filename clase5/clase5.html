@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta charset="UTF-8">
+        <title> Clase 5</title>
+        <link rel="stylesheet" href="hoja.css"/> 
+        <script type = "text/javascript" >
+        
+        var http = new XMLHttpRequest();
+        window.onload = function ()
+        {
+            http.onreadystatechange=callback;
+            http.open("GET","http://localhost:3000/personas",true);
+            http.send(); 
+            var agregar = document.getElementById("btnAgregar");
+            agregar.onclick=AbrirRecuadro;
+        }
+        
+        
+        function armarGrilla(jsonObj)
+        {
+            var tabla = document.getElementById("tabla");
+            for(var i = 0;i<jsonObj.length;i++)
+            {
+                var fila = "<tr><td>"+jsonObj[i].nombre+"</td><td>"+jsonObj[i].apellido+"</td><td>"+jsonObj[i].fecha+"</td><td>"+jsonObj[i].telefono+"</td></tr>";
+                tabla.innerHTML += fila;
+            }
+                /*
+            for (var i=0;i<jsonObject.length;i++)
+            {
+                console.log(jsonObject[i].nombre);
+            }*/
+        }
+        function callback()
+        {
+            if (http.readyState==4 && http.status==200)
+            {
+                armarGrilla(JSON.parse(http.responseText));              
+            }
+        }
+
+        function AbrirRecuadro()
+        {
+            var recuadro = document.getElementById("contenedorAgregar");
+            recuadro.hidden=false;
+            var enviar = document.getElementById("btnEnviar");
+            enviar.onclick=Enviar; 
+        }
+
+        function Enviar()
+        {
+            var usuario = document.getElementById("user");
+            var apellido = document.getElementById("apellido");
+            var telefono = document.getElementById("telefono");
+            var fecha = document.getElementById("fecha");
+            var tabla = document.getElementById("tabla");
+
+            function Limpiar()
+            {
+                usuario.value="";
+                apellido.value="";
+                fecha.value="";
+                telefono.value="";
+            }
+            if (usuario.value!="" && apellido.value!="" && fecha.value!="" && telefono.value!="")
+            {
+                var loader = document.getElementById("loader");
+                loader.hidden=false;
+                var fila = "<tr><td>"+usuario.value+"</td><td>"+apellido.value+"</td><td>"+fecha.value+"</td><td>"+telefono.value+"</td></tr>";
+                tabla.innerHTML += fila;
+                Limpiar();
+                CerrarRecuadro();
+                loader.hidden=true;
+
+                
+            }else
+            { 
+                alert("No se completo alguno de los campos, vuelta a intentarlo.");
+                Limpiar();
+                recuadro.hidden=false;
+                
+            }
+        }
+
+        function CerrarRecuadro()
+        {
+            var recuadro = document.getElementById("contenedorAgregar");
+            recuadro.hidden=true;
+        }
+        </script>
+    </head>
+    <body>
+        <div class = "container-fluid" id= "contBtn">
+            <input type="button" value="Agregar persona" id ="btnAgregar">
+        </div>
+        <table id="tabla">
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fecha</th>
+                <th>Telefono</th>
+            </tr>
+        </table>
+        <div class = "container-fluid" id= "contenedorAgregar" hidden=true>
+            Usuario:
+            <br>
+            <input type="text" id = "user" name="nombre">
+            <br>
+            Apellido:
+            <br>
+            <input type="text" id="apellido" name="apellido">
+            <br>
+            Fecha:
+            <br>
+            <input type="text" id = "fecha" name="fecha">
+            <br>
+            Telefono:
+            <br>
+            <input type="text" id = "telefono" name="telefono">
+            <br>
+            <input type="button" value = "Enviar" id = "btnEnviar" name="btnEnviar">
+            <br>
+        </div>
+        <div class="loader" id="loader" hidden=true></div>
+        
+    </body>
+</html>
