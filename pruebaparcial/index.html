@@ -5,205 +5,7 @@
         <meta charset="UTF-8">
         <title> ejemplo parcial</title>
         <link rel="stylesheet" href="estilos.css"/> 
-        <script type = "text/javascript" >
-        
-        var globalTr="";
-        var http = new XMLHttpRequest();
-        window.onload = function ()
-        {
-            
-            PedirPersonasGet();
-            var modificar = document.getElementById("btnModificar");
-            //modificar.addEventListener("click",Modificar);
-            var cerrar = document.getElementById("cerrar");
-            cerrar.onclick=CerrarRecuadro;
-            modificar.onclick=EditarPersonaPost;
-            var male = document.getElementById("male");
-            var female = document.getElementById("female");
-            if (female.checked==true)
-            {
-                male.checked=false;
-            }else if (male.checked==true)
-            {
-                female.checked=false;
-            }
-            /*
-            http.onreadystatechange=callback;
-            http.open("GET","http://localhost:3000/personas",true);
-            http.send(); 
-            var agregar = document.getElementById("btnAgregar");*/
-            //agregar.onclick=AbrirRecuadro;
-        }
-
-        function RealizarPeticionGet(metodo,url,funcion)
-        {
-            http.onreadystatechange=funcion;
-            
-            http.open(metodo,url,true);
-            http.send();
-        }
-        function RealizarPeticionPost(metodo,url,funcion)
-        {
-            http.onreadystatechange=funcion;
-            http.open(metodo,url,true);
-            http.setRequestHeader("Content-Type","application/json");
-            var male = document.getElementById("male");
-            var female = document.getElementById("female");
-            if (female.checked==true)
-            {
-                male.checked=false;
-                var data = {id:document.getElementById("id").value,nombre:document.getElementById("user").value,apellido:document.getElementById("apellido").value,fecha:document.getElementById("fecha").value,sexo:document.getElementById("female").value};
-            }else if (male.checked==true)
-            {
-                female.checked=false;
-                var data = {id:document.getElementById("id").value,nombre:document.getElementById("user").value,apellido:document.getElementById("apellido").value,fecha:document.getElementById("fecha").value,sexo:document.getElementById("male").value};
-            }
-            
-            //console.log(data);
-            http.send(JSON.stringify(data));
-        }
-
-        function callback()
-        {
-            
-            if (http.readyState==4 && http.status==200)
-            {
-                armarGrilla(JSON.parse(http.responseText));              
-            }
-        }
-
-        function respuesta()
-        {
-            if (http.readyState==4 && http.status==200)
-            {
-                //alert(JSON.parse(http.responseText));
-                //console.log(http.responseText);
-                Modificar(JSON.parse(http.responseText));//ver
-            }
-        }
-
-
-
-        function PedirPersonasGet()
-        {
-            //console.log ("hola");
-            RealizarPeticionGet("GET","http://localhost:3000/personas",callback);
-            
-        }
-
-        function NuevaPersonaPostConParametros()
-        {
-            RealizarPeticionPost("POST","http://localhost:3000/nueva",true);//aca deberia decir enviar? que es la que manda los datos???
-        }
-
-        function EditarPersonaPost()
-        {
-            RealizarPeticionPost("POST","http://localhost:3000/editar",respuesta);
-        }
-
-        
-        
-        
-        function armarGrilla(jsonObj)
-        {
-            var tabla = document.getElementById("tabla");
-            
-            for(var i = 0;i<jsonObj.length;i++)
-            {
-                var tr = document.createElement("tr");
-                globalTr=tr;
-                var td = document.createElement("td");
-                td.appendChild(document.createTextNode(jsonObj[i].nombre));
-                //td.setAttribute("id","nombre");
-                tr.appendChild(td);
-
-                var td2 = document.createElement("td");
-                td2.appendChild(document.createTextNode(jsonObj[i].apellido));
-               // td2.setAttribute("id","apellido");
-                tr.appendChild(td2);
-
-                var td3 = document.createElement("td");
-                td3.appendChild(document.createTextNode(jsonObj[i].fecha));
-                //td3.setAttribute("id","fecha");
-                tr.appendChild(td3);
-
-                var td4 = document.createElement("td");
-                td4.appendChild(document.createTextNode(jsonObj[i].sexo));
-                //td4.setAttribute("id","sexo");
-                tr.appendChild(td4); 
-
-                var td5 = document.createElement("td");
-                td5.appendChild(document.createTextNode(jsonObj[i].id));
-               // td5.setAttribute("id","id");
-                tr.appendChild(td5);
-                //td5.hidden=true;
-
-                tr.addEventListener("dblclick",AbrirRecuadro);
-                //var modificar = document.getElementById("btnModificar");
-                //tr.addEventListener(modificar.onclick,Modificar);
-                tabla.appendChild(tr);
-            }
-           
-            
-
-            /*
-            var tabla = document.getElementById("tabla");
-            for(var i = 0;i<jsonObj.length;i++)
-            {
-                var fila = "<tr><td>"+jsonObj[i].nombre+"</td><td>"+jsonObj[i].apellido+"</td><td>"+jsonObj[i].fecha+"</td><td>"+jsonObj[i].telefono+"</td></tr>";
-                tabla.innerHTML += fila;
-            }
-                /*
-            for (var i=0;i<jsonObject.length;i++)
-            {
-                console.log(jsonObject[i].nombre);
-            }*/
-        }
-        
-
-        function AbrirRecuadro(e)
-        {
-            var recuadro = document.getElementById("contenedorAgregar");
-            recuadro.hidden=false;
-            var tr = e.target.parentNode;
-            document.getElementById("user").value = tr.childNodes[0].innerHTML;
-            document.getElementById("apellido").value = tr.childNodes[1].innerHTML;
-            document.getElementById("fecha").value = tr.childNodes[2].innerHTML;
-            document.getElementById("id").value = tr.childNodes[4].innerHTML;
-            //console.log(tr.childNodes[4].innerHTML);
-            if (tr.childNodes[3].innerHTML=="Female")
-            {
-                document.getElementById("female").checked=true;
-                document.getElementById("male").checked=false;
-            }else if (tr.childNodes[3].innerHTML=="Male")
-            {
-                document.getElementById("male").checked=true;
-                document.getElementById("female").checked=false;
-            }
-            
-        }
-
-        function Modificar(persona)
-        {
-
-            var tabla = document.getElementById("tabla");
-            var tr = tabla.childNodes;
-            
-            for (var i =0;i<=tr.length;i++)
-            {
-               var tds= tr[i].getElementsByTagName("td");
-               console.log(tds);
-                
-            }
-        }
-
-        function CerrarRecuadro()
-        {
-            var recuadro = document.getElementById("contenedorAgregar");
-            recuadro.hidden=true;
-        }
-
-        
+        <script type = "text/javascript" src="funciones.js" >
         </script>
     </head>
     <body>
@@ -215,7 +17,8 @@
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Fecha</th>
-                <th>Telefono</th>
+                <th>Sexo</th>
+                <th>ID</th>
             </tr>
         </table>
         <div class = "container-fluid" id= "contenedorAgregar" hidden=true>
@@ -234,10 +37,6 @@
             <br>
             <input type="date" max="2020-05-17" id = "fecha" name="fecha">
             <br>
-            ID:
-            <br>
-            <input type="text" id = "id" name="id">
-            <br>
             Sexo:
             <br>
             <input type="radio" value= "female" id = "female" name="female">
@@ -248,6 +47,10 @@
             <br>
             <input type="button" value = "Modificar" id = "btnModificar" name="btnModificar">
             <input type="button" value = "Eliminar" id = "btnEliminar" name="btnEliminar">
+            <br>
+            ID:
+            <br>
+            <input type="text" id = "id" name="id">
             <br>
             
         </div>
