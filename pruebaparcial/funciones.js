@@ -1,14 +1,17 @@
 var globalTr="";
-        var http = new XMLHttpRequest();
+var spinner = "";
+var http = new XMLHttpRequest();
+var contenedorAgregar="";
         window.onload = function ()
         {
             
             PedirPersonasGet();
             var modificar = document.getElementById("btnModificar");
-            //modificar.addEventListener("click",Modificar);
+            spinner = document.getElementById("loader");
             var cerrar = document.getElementById("cerrar");
             cerrar.onclick=CerrarRecuadro;
             modificar.onclick=EditarPersonaPost;
+            modificar.addEventListener("click",CerrarRecuadro);
             var eliminar = document.getElementById("btnEliminar");
             eliminar.onclick=EliminarPersonaPost;
             var male = document.getElementById("male");
@@ -69,9 +72,9 @@ var globalTr="";
         {
             if (http.readyState==4 && http.status==200)
             {
-                //alert(JSON.parse(http.responseText));
-                //console.log(http.responseText);
-                Modificar(JSON.parse(http.responseText));//ver
+                loader.hidden=false;
+                Modificar(JSON.parse(http.responseText));
+                //loader.hidden=true;
             }
         }
 
@@ -79,7 +82,9 @@ var globalTr="";
         {
             if (http.readyState==4 && http.status==200)
             {
-                Eliminar(JSON.parse(http.responseText));//ver
+                
+                Eliminar(JSON.parse(http.responseText));
+
             }
         }
 
@@ -87,9 +92,7 @@ var globalTr="";
 
         function PedirPersonasGet()
         {
-            //console.log ("hola");
             RealizarPeticionGet("GET","http://localhost:3000/personas",callback);
-            
         }
 
         function NuevaPersonaPostConParametros()
@@ -99,7 +102,11 @@ var globalTr="";
 
         function EditarPersonaPost()
         {
+            //contenedorAgregar.hidden=true;
+            //loader.hidden=false;
             RealizarPeticionPost("POST","http://localhost:3000/editar",respuesta);
+            //loader.hidden=true;
+            //contenedorAgregar.hidden=false;
         }
 
         function EliminarPersonaPost()
@@ -107,8 +114,6 @@ var globalTr="";
             RealizarPeticionPost("POST","http://localhost:3000/eliminar",dPersona);
         }
 
-        
-        
         
         function armarGrilla(jsonObj)
         {
@@ -139,6 +144,7 @@ var globalTr="";
 
                 var td5 = document.createElement("td");
                 td5.appendChild(document.createTextNode(jsonObj[i].id));
+                td5.hidden=true;
                // td5.setAttribute("id","id");
                 tr.appendChild(td5);
                 //td5.hidden=true;
@@ -155,6 +161,7 @@ var globalTr="";
         function AbrirRecuadro(e)
         {
             var recuadro = document.getElementById("contenedorAgregar");
+            contenedorAgregar=recuadro;
             recuadro.hidden=false;
             var tr = e.target.parentNode;
             globalTr=tr;//la solucion estaba aca
@@ -165,6 +172,7 @@ var globalTr="";
             //console.log(tr.childNodes[4].innerHTML);
             if (tr.childNodes[3].innerHTML=="Female")
             {
+                //alert(tr.childNodes[3].innerHTML);
                 document.getElementById("female").checked=true;
                 document.getElementById("male").checked=false;
             }else if (tr.childNodes[3].innerHTML=="Male")
@@ -175,19 +183,22 @@ var globalTr="";
             
         }
 
-        function Modificar(persona)//mati si estas viendo esto ya lo solucione JAJAJA 
+        function Modificar(persona)
         {
-            if (globalTr.childNodes[3].innerHTML == persona.id)
-            {
+            //if (globalTr.childNodes[3].innerHTML == persona.id)
+            //{
+                //console.log(globalTr.childNodes[0].innerHTML);
                 globalTr.childNodes[0].innerHTML = persona.nombre;
+                //console.log(globalTr.childNodes[0].innerHTML);
                 globalTr.childNodes[1].innerHTML = persona.apellido;
                 globalTr.childNodes[2].innerHTML= persona.fecha;
-                globalTr.childNodes[4].innerHTML = persona.sexo;
-            }
+                globalTr.childNodes[3].innerHTML = persona.sexo;
+                spinner.hidden=true;
+            //}
             
         }
 
-        function Eliminar()//tambien hice el eliminar
+        function Eliminar()
         {
             globalTr.remove();
         }
@@ -196,4 +207,18 @@ var globalTr="";
         {
             var recuadro = document.getElementById("contenedorAgregar");
             recuadro.hidden=true;
+            spinner.hidden=false;
+            Spinner();
         }
+
+        function Spinner()
+        {
+            setTimeout(MostrarSpinner,3000);
+        }
+
+        function MostrarSpinner()
+        {
+            spinner.hidden=true;
+        }
+
+        

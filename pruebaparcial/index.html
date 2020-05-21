@@ -9,8 +9,10 @@
         </script>
     </head>
     <body>
-        <div class = "container-fluid" id= "contBtn">
-            <input type="button" value="Agregar persona" id ="btnAgregar">
+        
+        <div class = "container-fluid" id= "contBtn" >
+            <h1 id = "h1">Lista de personas</h1>
+            <input type="button" value="Agregar persona" id ="btnAgregar" hidden=true>
         </div>
         <table id="tabla">
             <tr>
@@ -18,7 +20,7 @@
                 <th>Apellido</th>
                 <th>Fecha</th>
                 <th>Sexo</th>
-                <th>ID</th>
+                <th style="display:none">ID</th>
             </tr>
         </table>
         <div class = "container-fluid" id= "contenedorAgregar" hidden=true>
@@ -26,35 +28,34 @@
             <input type="button" value = "x" id = "cerrar" name="cerrar">
             <br>
             Usuario:
-            <br>
             <input type="text" id = "user" name="nombre">
             <br>
             Apellido:
-            <br>
+            
             <input type="text" id="apellido" name="apellido">
             <br>
             Fecha:
-            <br>
+            
             <input type="date" max="2020-05-17" id = "fecha" name="fecha">
             <br>
             Sexo:
             <br>
-            <input type="radio" value= "female" id = "female" name="female">
+            <input type="radio" value= "Female" id = "female" name="female">
             <label for="female">female</label>
             <br>
-            <input type="radio" value = "male" id = "male" name="male">
+            <input type="radio" value = "Male" id = "male" name="male">
             <label for="male">male</label>
+            <br>
+            ID:
+            <input type="text" id = "id" name="id" readonly="readonly">
             <br>
             <input type="button" value = "Modificar" id = "btnModificar" name="btnModificar">
             <input type="button" value = "Eliminar" id = "btnEliminar" name="btnEliminar">
-            <br>
-            ID:
-            <br>
-            <input type="text" id = "id" name="id">
-            <br>
-            
+            <br>  
         </div>
-        <div class="loader" id="loader" hidden=true></div>
+        <div class="loader" id="loader"hidden=true>
+            <input type = "image" src="spinner.gif">
+        </div>
         
     </body>
 </html>
