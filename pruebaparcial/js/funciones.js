@@ -2,6 +2,12 @@ var globalTr="";
 var spinner = "";
 var http = new XMLHttpRequest();
 var contenedorAgregar="";
+
+/*
+//pruebo max
+var date = new Date();
+var parsed = date.getFullYear() +"-" +date.getMonth()+ "-"+ date.getDate();
+//alert (parsed);<---sale mal*/
         window.onload = function ()
         {
             
@@ -14,6 +20,8 @@ var contenedorAgregar="";
             modificar.addEventListener("click",CerrarRecuadro);
             var eliminar = document.getElementById("btnEliminar");
             eliminar.onclick=EliminarPersonaPost;
+            var agregar = document.getElementById("btnAgregar");
+            agregar.onclick= Agregar;
             var male = document.getElementById("male");
             var female = document.getElementById("female");
             if (female.checked==true)
@@ -59,6 +67,27 @@ var contenedorAgregar="";
             http.send(JSON.stringify(data));
         }
 
+        function RealizarPeticionPostNueva(metodo, url, funcion)
+        {
+            http.onreadystatechange=funcion;
+            http.open(metodo,url,true);
+            http.setRequestHeader("Content-Type","application/json");
+            var male = document.getElementById("male");
+            var female = document.getElementById("female");
+            if (female.checked==true && document.getElementById("user").value.length>=3 && document.getElementById("apellido").value.length>=3)
+            {
+                male.checked=false;
+                var data = {nombre:document.getElementById("user").value,apellido:document.getElementById("apellido").value,fecha:document.getElementById("fecha").value,sexo:document.getElementById("female").value};
+            }else if (male.checked==true&& document.getElementById("user").value.length>=3 && document.getElementById("apellido").value.length>=3)
+            {
+                female.checked=false;
+                var data = {nombre:document.getElementById("user").value,apellido:document.getElementById("apellido").value,fecha:document.getElementById("fecha").value,sexo:document.getElementById("male").value};
+            }
+            
+            //console.log(data);
+            http.send(JSON.stringify(data));
+        }
+
         function callback()
         {
             
@@ -84,7 +113,15 @@ var contenedorAgregar="";
             {
                 
                 Eliminar(JSON.parse(http.responseText));
+            }
+        }
 
+        function nueva()
+        {
+            if (http.readyState==4 && http.status==200)
+            {
+                
+                Agregar(JSON.parse(http.responseText));
             }
         }
 
@@ -97,7 +134,7 @@ var contenedorAgregar="";
 
         function NuevaPersonaPostConParametros()
         {
-            RealizarPeticionPost("POST","http://localhost:3000/nueva",true);//aca deberia decir enviar? que es la que manda los datos???
+            RealizarPeticionPostNueva("POST","http://localhost:3000/nueva",nueva);//aca deberia decir enviar? que es la que manda los datos???
         }
 
         function EditarPersonaPost()
@@ -167,6 +204,11 @@ var contenedorAgregar="";
             globalTr=tr;//la solucion estaba aca
             document.getElementById("user").value = tr.childNodes[0].innerHTML;
             document.getElementById("apellido").value = tr.childNodes[1].innerHTML;
+           
+        /*
+            document.getElementById("fecha").max = parsed;
+            alert (document.getElementById("fecha").max);*/
+
             document.getElementById("fecha").value = tr.childNodes[2].innerHTML;
             document.getElementById("id").value = tr.childNodes[4].innerHTML;
             //console.log(tr.childNodes[4].innerHTML);
@@ -185,6 +227,7 @@ var contenedorAgregar="";
 
         function Modificar(persona)
         {
+            
             //if (globalTr.childNodes[3].innerHTML == persona.id)
             //{
                 //console.log(globalTr.childNodes[0].innerHTML);
@@ -196,6 +239,35 @@ var contenedorAgregar="";
                 spinner.hidden=true;
             //}
             
+        }
+
+        function Agregar(persona)
+        {
+            var tabla = document.getElementById("tabla");
+            var tr = document.createElement("tr");
+            var td = document.createElement("td");
+            td.appendChild(document.createTextNode(persona.nombre));
+            tr.appendChild(td);
+
+            var td2 = document.createElement("td");
+            td2.appendChild(document.createTextNode(persona.apellido));
+            tr.appendChild(td2);
+
+            var td3 = document.createElement("td");
+            td3.appendChild(document.createTextNode(persona.fecha));
+            tr.appendChild(td3);
+
+            var td4 = document.createElement("td");
+            td4.appendChild(document.createTextNode(persona.sexo));
+            //td4.setAttribute("id","sexo");
+            tr.appendChild(td4); 
+
+            var td5 = document.createElement("td");
+            td5.appendChild(document.createTextNode(persona.id));
+            td5.hidden=true;
+            
+            tr.addEventListener("dblclick",AbrirRecuadro); 
+            tabla.appendChild(tr);
         }
 
         function Eliminar()

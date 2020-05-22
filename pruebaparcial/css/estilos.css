@@ -1,6 +1,6 @@
-#tabla/*, th, td*/
+#tabla
 { 
-    background-color: rgb(247, 152, 226);
+    background-color: cadetblue;
     border-collapse: collapse;  /*Los bordes de la tabla se pegarán (mejor aspecto) */
     border: 1px solid rgb(88, 17, 56);
     padding: 10px;
@@ -14,7 +14,8 @@
     z-index: -1; 
 }
 
-#th
+
+#th, td
 {
     border-collapse: collapse;  /*Los bordes de la tabla se pegarán (mejor aspecto) */
     border: 1px solid rgb(88, 17, 56);
@@ -22,6 +23,8 @@
     padding-left: 20px;
     border-radius:5px;
 }
+
+
 #btnAgregar
 {
     background-color: rgb(33, 202, 70);
@@ -37,28 +40,27 @@
     border-radius:5px;
 }
 
-/*
-#user, #apellido, #telefono, #fecha
-{
-    background-color:   rgb(221, 234, 240);
-    color: rosybrown;
-    border-radius:5px;
-}*/
-
 #contenedorAgregar
 {
+    justify-content: space-between;
     padding-left: 10px;
     background: whitesmoke;
-    border-radius:10px;
+    /*border-radius:10px;*/
     width: 50%;
     font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
     box-shadow: 12px 12px 5px 0px rgba(0,0,0,0.75);
-    flex-wrap: wrap; /* Lo uso para que en vez de achicar los div, ponga uno debajo de otro.*/
-    position: absolute; 
-    top:25%; /*25% este y*/ 
-    left:25%; /*25% este, estaria en el medio*/
-    right:25%;
+    flex-wrap: wrap; 
+    position: absolute;
+    top:25%; /*a 25 de arriba*/ 
+    left:25%; /*a 25 de la izquierda*/
+    right:25%;/*same derecha*/
    /* z-index: -1;*/
+}
+
+#divUser
+{
+    width: 100%;
 }
 
 #cerrar
@@ -66,29 +68,41 @@
     background-color: red;
     border: 1px solid black;
     color: white;
-    justify-content: right;
     text-align: center;
     font-size: 16px;
-    /*margin: 4px 2px;*/
+    margin: 4px 2px;
     cursor: pointer;
-    /*width: 10%;*/
-    border-radius:5px;
+    width: 5%;
+    /*
+    border-radius:5px;*/
+}
+
+
+/*nota manejar la posicion desde los div, lo demas desde el boton*/
+#divCerrar
+{
+    display: flex;
+    justify-content: flex-end;
 }
 
 #btnModificar
 {
-    background-color:greenyellow;
+    background-color: limegreen;
     border: 1px solid black;
     color: white;
-    width: 35%;
-    padding-left: 10%;
-    
+    width: 47%;
     text-align: center;
     font-size: 16px;
     /*margin: 4px 2px;*/
     cursor: pointer;
-    /*width: 10%;*/
-    border-radius:5px;
+    /*width: 10%;
+    border-radius:5px;*/
+}
+
+#divbotones
+{
+    justify-content: space-between;
+    flex-direction: row;
 }
 
 #btnEliminar
@@ -96,26 +110,34 @@
     background-color: red;
     border: 1px solid black;
     color: white;
-    padding-right: 10%;
-    width: 35%;
+    width: 47%;
     text-align: center;
     font-size: 16px;
     /*margin: 4px 2px;*/
     cursor: pointer;
-    /*width: 10%;*/
-    border-radius:5px;
+    /*width: 10%;
+    border-radius:5px;*/
 }
+
+/*
+#divEliminar
+{
+    
+    justify-content: space-between;
+}*/
 
 
 #loader
 {
+    background-color: black;
+    opacity: 0.5;
     flex-wrap: wrap; 
     position: absolute; 
     justify-content: center;
-    top:25%; /*25% este y*/ 
+    top:10%; /*25% este y*/ 
     left:25%; /*25% este, estaria en el medio*/
     right:25%;
-    bottom: 25%;
+    bottom: 10%;
     width: 100%;
 }
 
@@ -126,5 +148,5 @@
     right: 25%;
     font-family: 'Courier New', Courier, monospace;/*fuente*/
     text-align: center;
-    background-color: rgb(247, 152, 226);
+    background-color: darkcyan;
 }

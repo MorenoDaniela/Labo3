@@ -4,15 +4,15 @@
         
         <meta charset="UTF-8">
         <title> ejemplo parcial</title>
-        <link rel="stylesheet" href="estilos.css"/> 
-        <script type = "text/javascript" src="funciones.js" >
+        <link rel="stylesheet" href="css/estilos.css"/> 
+        <script type = "text/javascript" src="js/funciones.js" >
         </script>
     </head>
     <body>
         
         <div class = "container-fluid" id= "contBtn" >
             <h1 id = "h1">Lista de personas</h1>
-            <input type="button" value="Agregar persona" id ="btnAgregar" hidden=true>
+            
         </div>
         <table id="tabla">
             <tr>
@@ -24,37 +24,48 @@
             </tr>
         </table>
         <div class = "container-fluid" id= "contenedorAgregar" hidden=true>
+            <div id = "divCerrar">
+                <input type="button" value = "x" id = "cerrar" name="cerrar">
+                <br>
+                </div>
+            <div id = "divUser">
+                Usuario:
+                <input type="text" id = "user" name="nombre">
+                <br>
+            </div>
+            <div id = "divApellido">
+                Apellido:
+                <input type="text" id="apellido" name="apellido">
+                <br>
+            </div>
+            <div id = "divFecha">
+                Fecha:
+                <input type="date" max="2020-05-21" id = "fecha" name="fecha">
+            <br>
+            </div>
+            <div id = "divSexo">
+                Sexo:
+                <input type="radio" value= "Female" id = "female" name="female">
+                <label for="female">female</label>
+                
+                <input type="radio" value = "Male" id = "male" name="male">
+                <label for="male">male</label>
+                <br>
+            </div>
+            <div id = "divId">
+                Id:
+                <input type="text" id = "id" name="id" readonly="readonly">
+                <br>
+            </div>
+            <div id = "divbotones">
+                <input type="button" value = "Eliminar" id = "btnEliminar" name="btnEliminar">
             
-            <input type="button" value = "x" id = "cerrar" name="cerrar">
-            <br>
-            Usuario:
-            <input type="text" id = "user" name="nombre">
-            <br>
-            Apellido:
-            
-            <input type="text" id="apellido" name="apellido">
-            <br>
-            Fecha:
-            
-            <input type="date" max="2020-05-17" id = "fecha" name="fecha">
-            <br>
-            Sexo:
-            <br>
-            <input type="radio" value= "Female" id = "female" name="female">
-            <label for="female">female</label>
-            <br>
-            <input type="radio" value = "Male" id = "male" name="male">
-            <label for="male">male</label>
-            <br>
-            ID:
-            <input type="text" id = "id" name="id" readonly="readonly">
-            <br>
-            <input type="button" value = "Modificar" id = "btnModificar" name="btnModificar">
-            <input type="button" value = "Eliminar" id = "btnEliminar" name="btnEliminar">
-            <br>  
+                <input type="button" value = "Modificar" id = "btnModificar" name="btnModificar">
+                <input type="button" value="Agregar persona" id ="btnAgregar">
+            </div>
         </div>
         <div class="loader" id="loader"hidden=true>
-            <input type = "image" src="spinner.gif">
+            <input type = "image" src="img/spinner.gif">
         </div>
         
     </body>
