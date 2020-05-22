@@ -1,6 +1,6 @@
 #tabla
 { 
-    background-color: cadetblue;
+    background-color: gainsboro;
     border-collapse: collapse;  /*Los bordes de la tabla se pegarán (mejor aspecto) */
     border: 1px solid rgb(88, 17, 56);
     padding: 10px;
@@ -9,40 +9,34 @@
     text-align: center;/*alineacion del texto*/
     width: 100%; /*cuanto quiero que ocupe de la pantalla 50%*/
     /*margin: 25px 50px 75px 100px; ARRIBA, DERECHA, ABAJO, IZQUIERDA*/
-    border-radius:5px;
+   
     justify-content: center;
     z-index: -1; 
 }
 
-
+tr:nth-child(even)
+{
+    background-color: black;
+    color: gold;
+}
 #th, td
 {
     border-collapse: collapse;  /*Los bordes de la tabla se pegarán (mejor aspecto) */
     border: 1px solid rgb(88, 17, 56);
     padding: 10px;
     padding-left: 20px;
-    border-radius:5px;
+    
 }
 
-
-#btnAgregar
-{
-    background-color: rgb(33, 202, 70);
-    border: 1px solid black;
-    color: rgb(221, 234, 240);
-    padding: 10px;
-    padding-left: 20px;
-    text-align: center;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    width: 50%;
-    border-radius:5px;
-}
 
 #contenedorAgregar
 {
-    justify-content: space-between;
+    /*justify-content: space-between;
+    display: flex;
+    position: absolute;*/
+    position: fixed;
+    flex-wrap: wrap; 
+    
     padding-left: 10px;
     background: whitesmoke;
     /*border-radius:10px;*/
@@ -50,12 +44,10 @@
     font-size: 20px;
     font-family: 'Courier New', Courier, monospace;
     box-shadow: 12px 12px 5px 0px rgba(0,0,0,0.75);
-    flex-wrap: wrap; 
-    position: absolute;
     top:25%; /*a 25 de arriba*/ 
     left:25%; /*a 25 de la izquierda*/
     right:25%;/*same derecha*/
-   /* z-index: -1;*/
+    z-index: 998;
 }
 
 #divUser
@@ -90,13 +82,23 @@
     background-color: limegreen;
     border: 1px solid black;
     color: white;
-    width: 47%;
+    width: 30%;
     text-align: center;
     font-size: 16px;
     /*margin: 4px 2px;*/
     cursor: pointer;
     /*width: 10%;
     border-radius:5px;*/
+}
+#btnAgregar
+{
+    background-color: limegreen;
+    border: 1px solid black;
+    color:white;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    width: 30%;
 }
 
 #divbotones
@@ -110,7 +112,7 @@
     background-color: red;
     border: 1px solid black;
     color: white;
-    width: 47%;
+    width: 30%;
     text-align: center;
     font-size: 16px;
     /*margin: 4px 2px;*/
@@ -119,26 +121,18 @@
     border-radius:5px;*/
 }
 
-/*
-#divEliminar
-{
-    
-    justify-content: space-between;
-}*/
-
-
 #loader
 {
-    background-color: black;
+    /*background-color: black;*/
     opacity: 0.5;
     flex-wrap: wrap; 
-    position: absolute; 
-    justify-content: center;
-    top:10%; /*25% este y*/ 
-    left:25%; /*25% este, estaria en el medio*/
-    right:25%;
-    bottom: 10%;
+    position: fixed; 
+    
+    top:10%;
+    
+    text-align: center;
     width: 100%;
+    z-index: 999;
 }
 
 #h1
@@ -148,5 +142,5 @@
     right: 25%;
     font-family: 'Courier New', Courier, monospace;/*fuente*/
     text-align: center;
-    background-color: darkcyan;
+    background-color: darkgoldenrod;
 }

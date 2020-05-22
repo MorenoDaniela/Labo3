@@ -2,6 +2,8 @@ var globalTr="";
 var spinner = "";
 var http = new XMLHttpRequest();
 var contenedorAgregar="";
+var email ="";
+var pass = "";
 
 /*
 //pruebo max
@@ -17,20 +19,19 @@ var parsed = date.getFullYear() +"-" +date.getMonth()+ "-"+ date.getDate();
             var cerrar = document.getElementById("cerrar");
             cerrar.onclick=CerrarRecuadro;
             modificar.onclick=EditarPersonaPost;
-            modificar.addEventListener("click",CerrarRecuadro);
+            //modificar.addEventListener("click",CerrarRecuadro);
+            //modificar.addEventListener("click",Spinner);
             var eliminar = document.getElementById("btnEliminar");
             eliminar.onclick=EliminarPersonaPost;
+            //eliminar.addEventListener("click",Spinner);
             var agregar = document.getElementById("btnAgregar");
-            agregar.onclick= Agregar;
-            var male = document.getElementById("male");
-            var female = document.getElementById("female");
-            if (female.checked==true)
-            {
-                male.checked=false;
-            }else if (male.checked==true)
-            {
-                female.checked=false;
-            }
+            agregar.onclick= NuevaPersonaPostConParametros;
+
+            email = document.getElementById("email");
+            pass = document.getElementById("pass");
+            var btnLogin = document.getElementById("btnLogin");
+            btnLogin.onclick=Log;
+            
             /*
             http.onreadystatechange=callback;
             http.open("GET","http://localhost:3000/personas",true);
@@ -41,34 +42,93 @@ var parsed = date.getFullYear() +"-" +date.getMonth()+ "-"+ date.getDate();
 
         function RealizarPeticionGet(metodo,url,funcion)
         {
+            spinner.hidden=false;
             http.onreadystatechange=funcion;
-            
             http.open(metodo,url,true);
             http.send();
         }
+
         function RealizarPeticionPost(metodo,url,funcion)
         {
+            spinner.hidden=false;
+            http.onreadystatechange=funcion;
+            http.open(metodo,url,true);
+            http.setRequestHeader("Content-Type","application/json");
+            if (document.getElementById("user").value.length>=3 && document.getElementById("apellido").value.length>=3)
+            {
+                var data = {id:document.getElementById("id").value,nombre:document.getElementById("user").value,apellido:document.getElementById("apellido").value,fecha:document.getElementById("fecha").value,sexo:document.querySelector('input[name="gender"]:checked').value};
+            }
+            //console.log(data);
+            http.send(JSON.stringify(data));
+        }
+
+        function Log()
+        {
+            RealizarLogin("POST","http://localhost:3000/login",login);
+        }
+        function RealizarLogin(metodo, url, funcion)
+        {
+            //spinner.hidden=false;
+            http.onreadystatechange=funcion;
+            http.open(metodo,url,true);
+            http.setRequestHeader("Content-Type","application/json");
+            var data = {email:email.value,password:pass.value};
+            http.send(JSON.stringify(data));
+        }
+
+        function login()
+        {
+            if (http.readyState==4 && http.status==200)
+            {
+                Loguear(JSON.parse(http.responseText)); 
+                //spinner.hidden=true;            
+            }
+        }
+
+        function Loguear(login)
+        {
+            console.log(login.type);
+        }
+
+        /*
+        function RealizarPeticionPost(metodo,url,funcion)
+        {
+            spinner.hidden=false;
             http.onreadystatechange=funcion;
             http.open(metodo,url,true);
             http.setRequestHeader("Content-Type","application/json");
             var male = document.getElementById("male");
             var female = document.getElementById("female");
+            var gender = document.getElementsByName("gender").value;
+            
             if (female.checked==true && document.getElementById("user").value.length>=3 && document.getElementById("apellido").value.length>=3)
             {
-                male.checked=false;
                 var data = {id:document.getElementById("id").value,nombre:document.getElementById("user").value,apellido:document.getElementById("apellido").value,fecha:document.getElementById("fecha").value,sexo:document.getElementById("female").value};
             }else if (male.checked==true&& document.getElementById("user").value.length>=3 && document.getElementById("apellido").value.length>=3)
             {
-                female.checked=false;
                 var data = {id:document.getElementById("id").value,nombre:document.getElementById("user").value,apellido:document.getElementById("apellido").value,fecha:document.getElementById("fecha").value,sexo:document.getElementById("male").value};
             }
             
+            //console.log(data);
+            http.send(JSON.stringify(data));
+        }*/
+
+        function RealizarPeticionPostEliminar(metodo,url,funcion)
+        {
+            spinner.hidden=false;
+            http.onreadystatechange=funcion;
+            http.open(metodo,url,true);
+            http.setRequestHeader("Content-Type","application/json");
+            
+                var data = {id:document.getElementById("id").value};
+        
             //console.log(data);
             http.send(JSON.stringify(data));
         }
 
         function RealizarPeticionPostNueva(metodo, url, funcion)
         {
+            spinner.hidden=false;
             http.onreadystatechange=funcion;
             http.open(metodo,url,true);
             http.setRequestHeader("Content-Type","application/json");
@@ -84,7 +144,7 @@ var parsed = date.getFullYear() +"-" +date.getMonth()+ "-"+ date.getDate();
                 var data = {nombre:document.getElementById("user").value,apellido:document.getElementById("apellido").value,fecha:document.getElementById("fecha").value,sexo:document.getElementById("male").value};
             }
             
-            //console.log(data);
+            console.log(data);
             http.send(JSON.stringify(data));
         }
 
@@ -93,17 +153,17 @@ var parsed = date.getFullYear() +"-" +date.getMonth()+ "-"+ date.getDate();
             
             if (http.readyState==4 && http.status==200)
             {
-                armarGrilla(JSON.parse(http.responseText));              
+                armarGrilla(JSON.parse(http.responseText)); 
+                spinner.hidden=true;            
             }
         }
 
         function respuesta()
         {
             if (http.readyState==4 && http.status==200)
-            {
-                loader.hidden=false;
+            { 
                 Modificar(JSON.parse(http.responseText));
-                //loader.hidden=true;
+                spinner.hidden=true; 
             }
         }
 
@@ -111,8 +171,8 @@ var parsed = date.getFullYear() +"-" +date.getMonth()+ "-"+ date.getDate();
         {
             if (http.readyState==4 && http.status==200)
             {
-                
                 Eliminar(JSON.parse(http.responseText));
+                spinner.hidden=true; 
             }
         }
 
@@ -120,8 +180,9 @@ var parsed = date.getFullYear() +"-" +date.getMonth()+ "-"+ date.getDate();
         {
             if (http.readyState==4 && http.status==200)
             {
-                
+                //console.log(JSON.parse(http.responseText));
                 Agregar(JSON.parse(http.responseText));
+                spinner.hidden=true; 
             }
         }
 
@@ -134,21 +195,17 @@ var parsed = date.getFullYear() +"-" +date.getMonth()+ "-"+ date.getDate();
 
         function NuevaPersonaPostConParametros()
         {
-            RealizarPeticionPostNueva("POST","http://localhost:3000/nueva",nueva);//aca deberia decir enviar? que es la que manda los datos???
+            RealizarPeticionPostNueva("POST","http://localhost:3000/nueva",nueva);
         }
 
         function EditarPersonaPost()
         {
-            //contenedorAgregar.hidden=true;
-            //loader.hidden=false;
             RealizarPeticionPost("POST","http://localhost:3000/editar",respuesta);
-            //loader.hidden=true;
-            //contenedorAgregar.hidden=false;
         }
 
         function EliminarPersonaPost()
         {
-            RealizarPeticionPost("POST","http://localhost:3000/eliminar",dPersona);
+            RealizarPeticionPostEliminar("POST","http://localhost:3000/eliminar",dPersona);
         }
 
         
@@ -279,18 +336,20 @@ var parsed = date.getFullYear() +"-" +date.getMonth()+ "-"+ date.getDate();
         {
             var recuadro = document.getElementById("contenedorAgregar");
             recuadro.hidden=true;
-            spinner.hidden=false;
-            Spinner();
+            //spinner.hidden=false;
+            //Spinner();
         }
 
+        /*
         function Spinner()
         {
+            spinner.hidden=false;
             setTimeout(MostrarSpinner,3000);
         }
 
         function MostrarSpinner()
         {
             spinner.hidden=true;
-        }
+        }*/
 
         
