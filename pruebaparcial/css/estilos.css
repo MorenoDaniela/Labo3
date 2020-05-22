@@ -144,3 +144,11 @@ tr:nth-child(even)
     text-align: center;
     background-color: darkgoldenrod;
 }
+
+#login
+{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: darkgoldenrod;
+    color: black;
+    width: 25%;
+}

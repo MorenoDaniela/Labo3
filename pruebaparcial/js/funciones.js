@@ -19,13 +19,14 @@ var parsed = date.getFullYear() +"-" +date.getMonth()+ "-"+ date.getDate();
             var cerrar = document.getElementById("cerrar");
             cerrar.onclick=CerrarRecuadro;
             modificar.onclick=EditarPersonaPost;
-            //modificar.addEventListener("click",CerrarRecuadro);
+            modificar.addEventListener("click",CerrarRecuadro);
             //modificar.addEventListener("click",Spinner);
             var eliminar = document.getElementById("btnEliminar");
             eliminar.onclick=EliminarPersonaPost;
-            //eliminar.addEventListener("click",Spinner);
+            eliminar.addEventListener("click",CerrarRecuadro);
             var agregar = document.getElementById("btnAgregar");
             agregar.onclick= NuevaPersonaPostConParametros;
+            agregar.addEventListener("click",CerrarRecuadro);
 
             email = document.getElementById("email");
             pass = document.getElementById("pass");
@@ -57,9 +58,45 @@ var parsed = date.getFullYear() +"-" +date.getMonth()+ "-"+ date.getDate();
             if (document.getElementById("user").value.length>=3 && document.getElementById("apellido").value.length>=3)
             {
                 var data = {id:document.getElementById("id").value,nombre:document.getElementById("user").value,apellido:document.getElementById("apellido").value,fecha:document.getElementById("fecha").value,sexo:document.querySelector('input[name="gender"]:checked').value};
+                http.send(JSON.stringify(data));
+            }else
+            {
+                alert ("faltan datos");
+                spinner.hidden=true;
             }
             //console.log(data);
+            
+        }
+        function RealizarPeticionPostEliminar(metodo,url,funcion)
+        {
+            spinner.hidden=false;
+            http.onreadystatechange=funcion;
+            http.open(metodo,url,true);
+            http.setRequestHeader("Content-Type","application/json");
+            
+                var data = {id:document.getElementById("id").value};
+        
+            //console.log(data);
             http.send(JSON.stringify(data));
+        }
+
+        function RealizarPeticionPostNueva(metodo, url, funcion)
+        {
+            spinner.hidden=false;
+            http.onreadystatechange=funcion;
+            http.open(metodo,url,true);
+            http.setRequestHeader("Content-Type","application/json");
+            if (document.getElementById("user").value.length>=3 && document.getElementById("apellido").value.length>=3)
+            {
+                var data = {nombre:document.getElementById("user").value,apellido:document.getElementById("apellido").value,fecha:document.getElementById("fecha").value,sexo:document.querySelector('input[name="gender"]:checked').value};
+                http.send(JSON.stringify(data));
+            }else
+            {
+                alert("faltan datos");
+                spinner.hidden=true;
+            }
+            //console.log(data);
+            
         }
 
         function Log()
@@ -113,40 +150,7 @@ var parsed = date.getFullYear() +"-" +date.getMonth()+ "-"+ date.getDate();
             http.send(JSON.stringify(data));
         }*/
 
-        function RealizarPeticionPostEliminar(metodo,url,funcion)
-        {
-            spinner.hidden=false;
-            http.onreadystatechange=funcion;
-            http.open(metodo,url,true);
-            http.setRequestHeader("Content-Type","application/json");
-            
-                var data = {id:document.getElementById("id").value};
         
-            //console.log(data);
-            http.send(JSON.stringify(data));
-        }
-
-        function RealizarPeticionPostNueva(metodo, url, funcion)
-        {
-            spinner.hidden=false;
-            http.onreadystatechange=funcion;
-            http.open(metodo,url,true);
-            http.setRequestHeader("Content-Type","application/json");
-            var male = document.getElementById("male");
-            var female = document.getElementById("female");
-            if (female.checked==true && document.getElementById("user").value.length>=3 && document.getElementById("apellido").value.length>=3)
-            {
-                male.checked=false;
-                var data = {nombre:document.getElementById("user").value,apellido:document.getElementById("apellido").value,fecha:document.getElementById("fecha").value,sexo:document.getElementById("female").value};
-            }else if (male.checked==true&& document.getElementById("user").value.length>=3 && document.getElementById("apellido").value.length>=3)
-            {
-                female.checked=false;
-                var data = {nombre:document.getElementById("user").value,apellido:document.getElementById("apellido").value,fecha:document.getElementById("fecha").value,sexo:document.getElementById("male").value};
-            }
-            
-            console.log(data);
-            http.send(JSON.stringify(data));
-        }
 
         function callback()
         {
