@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Clase 1</title>
+    </head>
+
+    <body>
+        <imput type="file">
+        CLASE UNO LABO VIERNES
+        <imput type="button" value="Enviar">
+    </body>
+</html>
