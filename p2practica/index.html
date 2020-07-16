@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta charset="UTF-8">
+        <title> Parcial 2 Moreno Daniela</title>
+        <link rel="stylesheet" href="css/estilos.css"/> 
+        <script src="Mascota.js"></script>
+        <script src="Gato.js"></script>
+        <script src="Pajaro.js"></script>
+        <script src="Perro.js"></script>
+        <script src="funcionesHtml.js"></script>
+    </head>
+    <body>
+        <div class = "container-fluid" id= "contenedorAgregar">
+            <div id = "divCerrar">
+                <input type="button" value = "x" id = "cerrar" name="cerrar">
+                <br>
+            </div>
+            <div id = "divMascota">
+                Tipo de Mascota:
+                <select name="select" id ="tipo" enable>
+                    <option value="Gato">Gato</option> 
+                    <option value="Perro">Perro</option>
+                    <option value="Pajaro">Pajaro</option>
+                  </select>
+                <br>
+            </div>
+            <div id = "divNombre">
+                Nombre:
+                <input type="text" id = "nombre" name="nombre">
+                <br>
+            </div>
+            <div id = "divAtributo">
+                Atributo:
+                <input type="text" id = "atributo" name="atributo">
+            <br>
+            </div>
+            <div id = "divId">
+                <input type="text" id = "id" name="id" readonly="readonly" hidden=true >
+                <br>
+            </div>
+            <div id = "divbotones">
+                <input type="button" value = "Guardar" id = "btnGuardar" name="btnGuardar">
+                <input type="button" value = "Eliminar" id = "btnEliminar" name="btnEliminar">
+                <input type="button" value = "Modificar" id = "btnModificar" name="btnModificar">
+                <br>
+            </div>
+            <div id = "divBuscar"> 
+                <input type = "text" id = "textBuscar" name = "txtBuscar" >
+                <input type = "button" value = "buscar" id = "btnBuscar" name ="btnBuscar">
+            </div>
+        </div>
+        <div class = "container-fluid" id= "contBtn" >
+            <h1 id = "h1">Lista de Mascotas</h1>
+        </div>
+        <table id="tabla">
+            <tr>
+                <th>Nombre</th>
+                <th>Atributo</th>
+                <th style="display:none">ID</th>
+            </tr>
+        </table>
+    </body>
+</html>
