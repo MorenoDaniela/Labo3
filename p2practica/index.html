@@ -28,7 +28,7 @@
             </div>
             <div id = "divNombre">
                 Nombre:
-                <input type="text" id = "nombre" name="nombre">
+                <input type="text" id = "nombre" name="nombre" onkeypress="Animales.BuscarMascota">
                 <br>
             </div>
             <div id = "divAtributo">
@@ -55,6 +55,15 @@
             <h1 id = "h1">Lista de Mascotas</h1>
         </div>
         <table id="tabla">
+            <tr>
+                <th>Nombre</th>
+                <th>Atributo</th>
+                <th>Tipo Mascota</th>
+                <th style="display:none">ID</th>
+            </tr>
+        </table>
+
+        <table id="tablaCoincidencias" hidden=true>
             <tr>
                 <th>Nombre</th>
                 <th>Atributo</th>

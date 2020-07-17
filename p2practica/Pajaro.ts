@@ -4,9 +4,9 @@ namespace Animales
     {
         private tipo:eTipo;
 
-        constructor(nombre:string,tipo:eTipo)
+        constructor(id:number,nombre:string,tipo:eTipo)
         {
-            super(nombre);//llamo al constructor de la clase padre
+            super(id,nombre);//llamo al constructor de la clase padre
             this.tipo=tipo;//inicializo atributos propios
         }
 

@@ -90,6 +90,22 @@ tr:nth-child(even)
     /*width: 10%;
     border-radius:5px;*/
 }
+
+#tablaCoincidencias
+{ 
+    background-color: gainsboro;
+    border-collapse: collapse;  /*Los bordes de la tabla se pegarán (mejor aspecto) */
+    border: 1px solid rgb(88, 17, 56);
+    padding: 10px;
+    padding-left: 20px;
+    font-family: 'Courier New', Courier, monospace;/*fuente*/
+    text-align: center;/*alineacion del texto*/
+    width: 100%; /*cuanto quiero que ocupe de la pantalla 50%*/
+    /*margin: 25px 50px 75px 100px; ARRIBA, DERECHA, ABAJO, IZQUIERDA*/
+   
+    justify-content: center;
+    z-index: -1; 
+}
 #btnGuardar
 {
     background-color: limegreen;

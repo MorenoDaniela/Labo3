@@ -4,9 +4,9 @@ namespace Animales
     {
         private raza:string;
 
-        constructor(nombre:string,raza:string)
+        constructor(id:number,nombre:string,raza:string)
         {
-            super(nombre);//llamo al constructor de la clase padre
+            super(id,nombre);//llamo al constructor de la clase padre
             this.raza=raza;//inicializo atributos propios
         }
 

@@ -1,36 +1,20 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Animales;
 (function (Animales) {
-    var Pajaro = /** @class */ (function (_super) {
-        __extends(Pajaro, _super);
-        function Pajaro(nombre, tipo) {
-            var _this = _super.call(this, nombre) || this;
-            _this.tipo = tipo; //inicializo atributos propios
-            return _this;
+    class Pajaro extends Animales.Mascota {
+        constructor(id, nombre, tipo) {
+            super(id, nombre); //llamo al constructor de la clase padre
+            this.tipo = tipo; //inicializo atributos propios
         }
-        Pajaro.prototype.getTipo = function () {
+        getTipo() {
             return this.tipo;
-        };
-        Pajaro.prototype.setTipo = function (tipo) {
+        }
+        setTipo(tipo) {
             this.tipo = tipo;
-        };
-        return Pajaro;
-    }(Animales.Mascota));
+        }
+    }
     Animales.Pajaro = Pajaro;
-    var eTipo;
+    let eTipo;
     (function (eTipo) {
         eTipo[eTipo["Avestruz"] = 0] = "Avestruz";
         eTipo[eTipo["Buitre"] = 1] = "Buitre";

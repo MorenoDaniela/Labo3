@@ -3,8 +3,10 @@ namespace Animales
     export class Mascota
     {
         private nombre : string;
-        constructor(nombre:string)
+        private id : number;
+        constructor(id:number,nombre:string)
         {
+            this.id=id;
             this.nombre=nombre;
         }
 
@@ -16,6 +18,16 @@ namespace Animales
         public setNombre(nombre:string):void
         {
             this.nombre=nombre;
+        }
+
+        public getId():number
+        {
+            return this.id;
+        }
+
+        public setId(id:number):void
+        {
+            this.id=id;
         }
     }
 }

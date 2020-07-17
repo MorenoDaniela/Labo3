@@ -4,9 +4,9 @@ namespace Animales
     {
         private cantidadVidas:number=9;
 
-        constructor(nombre:string,cantidadVidas:number)
+        constructor(id:number,nombre:string,cantidadVidas:number)
         {
-            super(nombre);//llamo al constructor de la clase padre
+            super(id,nombre);//llamo al constructor de la clase padre
             this.cantidadVidas=cantidadVidas;//inicializo atributos propios
         }
 

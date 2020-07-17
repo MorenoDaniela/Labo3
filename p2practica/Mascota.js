@@ -1,17 +1,23 @@
 "use strict";
 var Animales;
 (function (Animales) {
-    var Mascota = /** @class */ (function () {
-        function Mascota(nombre) {
+    class Mascota {
+        constructor(id, nombre) {
+            this.id = id;
             this.nombre = nombre;
         }
-        Mascota.prototype.getNombre = function () {
+        getNombre() {
             return this.nombre;
-        };
-        Mascota.prototype.setNombre = function (nombre) {
+        }
+        setNombre(nombre) {
             this.nombre = nombre;
-        };
-        return Mascota;
-    }());
+        }
+        getId() {
+            return this.id;
+        }
+        setId(id) {
+            this.id = id;
+        }
+    }
     Animales.Mascota = Mascota;
 })(Animales || (Animales = {}));
